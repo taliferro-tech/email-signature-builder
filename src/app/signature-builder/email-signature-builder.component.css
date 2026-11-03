@@ -126,6 +126,7 @@
 .sig-btn:hover { background: var(--surface2); }
 .sig-btn--primary { flex: 1; background: var(--blue); color: #fff; }
 .sig-btn--primary:hover { background: var(--blue); filter: brightness(.96); }
+.sig-profile { width: 100%; margin-top: 10px; }
 .sig-status { margin: -4px 0 0; color: var(--muted); font-size: 13px; }
 
 .sig-code { padding: 14px 16px; border-radius: 20px; background: var(--surface); }
@@ -172,7 +173,7 @@
   .sig-intro { display: none; }
   .sig-seg--tabs { display: flex; margin-bottom: 14px; }
   .sig-group.is-off-m { display: none; }
-  .sig-actions, .sig-status { display: none; }
+  .sig-actions, .sig-status, .sig-profile { display: none; }
   .sig-fields { grid-template-columns: 1fr; }
   .sig-mbar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; display: flex; gap: 10px;

@@ -12,6 +12,9 @@ import { AlsoFromUsComponent } from '../shared/also-from-us/also-from-us.compone
 
 type PlatformKey = 'gmail' | 'outlook' | 'apple-mail' | 'yahoo';
 type TemplateKey = 'clean' | 'centered' | 'sidebar' | 'minimal' | 'spotlight';
+const PROFILE_URL = 'https://app.16ahead.com/update-profile';
+/** The profile drops anything longer (signature-handoff.util.ts in the TODD frontend). */
+const PROFILE_HANDOFF_MAX = 200_000;
 
 interface PlatformGuide {
   key: PlatformKey;
@@ -190,6 +193,22 @@ export class EmailSignatureBuilderComponent {
     } catch {
       this.flash( 'Copy failed. Try Download HTML.' );
     }
+  }
+
+  /** Opens the 16Ahead profile with this signature, ready to save (Ty, 2026-11-03).
+   *  It rides in the URL fragment, so it never reaches a server; the profile
+   *  asks before saving it. */
+  saveToProfile (): void {
+    if ( !this.isBrowser ) return;
+    const bytes = new TextEncoder().encode( this.buildHtml() );
+    let binary = '';
+    bytes.forEach( ( b ) => { binary += String.fromCharCode( b ); } );
+    const encoded = btoa( binary ).replace( /\+/g, '-' ).replace( /\//g, '_' ).replace( /=+$/, '' );
+    if ( encoded.length > PROFILE_HANDOFF_MAX ) {
+      this.flash( 'Too large to send. Try a smaller logo, or use Copy signature.' );
+      return;
+    }
+    window.open( `${PROFILE_URL}#signature=${encoded}`, '_blank', 'noopener' );
   }
 
   private flashTimer: ReturnType<typeof setTimeout> | null = null;

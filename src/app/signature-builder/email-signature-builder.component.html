@@ -121,6 +121,9 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>{{ showHtml ? 'Hide HTML' : 'View HTML' }}
         </button>
       </div>
+      <button type="button" class="sig-btn sig-profile" data-track-cta="Signature Save To Profile" (click)="saveToProfile()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Save to my 16Ahead profile
+      </button>
       <p class="sig-status" role="status" *ngIf="copyMessage && copyMessage !== 'Copied'">{{ copyMessage }}</p>
 
       <div class="sig-code" *ngIf="showHtml">
@@ -143,6 +146,7 @@
   <!-- Phone: copy is always within reach (9b) -->
   <div class="sig-mbar">
     <button type="button" class="sig-btn sig-btn--primary" (click)="copySignature()">{{ copyMessage === 'Copied' ? 'Copied' : 'Copy signature' }}</button>
+    <button type="button" class="sig-mbar__dl" data-track-cta="Signature Save To Profile" (click)="saveToProfile()" aria-label="Save to my 16Ahead profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
     <button type="button" class="sig-mbar__dl" (click)="downloadHtml()" aria-label="Download HTML"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
   </div>
 
